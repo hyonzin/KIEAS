@@ -22,7 +22,6 @@ public class Configuration {
         CmdLineParser parser = new CmdLineParser();
         Object object = null;
        
-        // Define Option Help
         CmdLineParser.Option configFilePath = addHelp(optionHelpStrings,
         		parser.addStringOption('c', "conf"), "This is path of configuration file.");
 
