@@ -22,5 +22,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/activemq-all-5.12.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/javax.jms-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/yamlbeans-1.06.jar"/>
+	<classpathentry kind="lib" path="lib/jargs-1.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
