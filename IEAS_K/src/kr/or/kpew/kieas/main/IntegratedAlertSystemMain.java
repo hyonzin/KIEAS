@@ -12,15 +12,29 @@ import kr.or.kpew.kieas.network.jms.AlertSystemTransmitter;
 import kr.or.kpew.kieas.network.jms.GatewayTransmitter;
 import kr.or.kpew.kieas.network.jms.IssuerTransmitter;
 
+import jargs.gnu.CmdLineParser;
+import jargs.gnu.CmdLineParser.Option;
+import java.util.List;
+
+import org.apache.log4j.spi.OptionHandler;
+
+import java.util.ArrayList;
+
+
 /**
  * 1개의 경보발령대, 1개의 통합게이트웨이, 1개의 경보시스템을 동시에 실행시켜주는 메인 클래스.
  * 각 콤포넌트간 통신을 위해 ActiveMQ를 먼저 실행하고 이 프로젝트를 실행시키자.
  *
  */
 
-public class IntegratedAlertSystemMain
-{
-	
+//TODO
+// Builder 를 Interface로 (IBuilder) 만들어서, Google Protobuf를 쓰는 GBuilder, 변조교님이 만든걸 쓰는 BBuilder가 그걸 구현하도록
+// Config 파일 .yml
+// view 항목별로 에쁘게
+// Issuer에서 필수/선택 구분해서 예쁘
+
+public class IntegratedAlertSystemMain {
+
 	/**
 	 * 통신방법에 대한 enumeration, 이 프로젝트에서는 JMS 방식만 사용.
 	 *
@@ -30,7 +44,7 @@ public class IntegratedAlertSystemMain
 		JMS, TCPIP, XMPP, AMQP
 	}
 	
-	public IntegratedAlertSystemMain()
+	public IntegratedAlertSystemMain(Configuration conf)
 	{
 		//JMS 통신방식으로 구성요소들 초기화 작업, 발령대, 게이트웨이, 경보시스템 생성
 		init(TransmitterType.JMS);
@@ -116,9 +130,9 @@ public class IntegratedAlertSystemMain
 		return null;
 	}
 
-
 	public static void main(String[] args)
 	{
-		new IntegratedAlertSystemMain();
+		Configuration conf = new Configuration(args);
+		new IntegratedAlertSystemMain(conf);
 	}
 }
