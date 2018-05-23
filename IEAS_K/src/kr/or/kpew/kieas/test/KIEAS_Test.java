@@ -89,7 +89,7 @@ public class KIEAS_Test {
 		kieasMessageBuilder.setAreaDesc(0, 0, "Area Description");
 
 		String result1 = kieasMessageBuilder.getMessage();
-
+		
 		// 구글 CAP 라이브러리를 이용한 CAP메시지 생성
 		// Alert 요소 작성
 		Alert alert = Alert.newBuilder().setXmlns(CapValidator.CAP_LATEST_XMLNS).setIdentifier("Identifier")

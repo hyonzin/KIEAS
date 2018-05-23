@@ -59,7 +59,7 @@ public class AlertSystemModel extends IntegratedEmergencyAlertSystem {
 		case ACTUAL:
 			sendAcknowledge(message, validationResults);
 			setChanged();
-			notifyObservers(message);
+			notifyObservers(kieasMessageBuilder);
 			break;
 		case EXERCISE:
 			break;

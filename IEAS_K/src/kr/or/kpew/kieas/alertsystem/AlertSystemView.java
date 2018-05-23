@@ -21,6 +21,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import kr.or.kpew.kieas.common.AlertSystemProfile;
+import kr.or.kpew.kieas.common.IKieasMessageBuilder;
 
 public class AlertSystemView implements Observer {
 	private AlertSystemController controller;
@@ -137,8 +138,11 @@ public class AlertSystemView implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(arg instanceof String) {		
-			alertArea.setText((String)arg);
+		if(arg instanceof IKieasMessageBuilder) {
+			IKieasMessageBuilder kieasMessageBuilder = (IKieasMessageBuilder)arg;
+			
+			// alertArea.setText((String)kieasMessageBuilder.getIdentifier());
+			alertArea.setText(kieasMessageBuilder.getIdentifier());
 		}
 		else if(arg instanceof AlertSystemProfile) {
 			AlertSystemProfile profile = (AlertSystemProfile)arg;
