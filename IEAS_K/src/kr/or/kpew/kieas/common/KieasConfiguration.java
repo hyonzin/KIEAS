@@ -1,5 +1,12 @@
 package kr.or.kpew.kieas.common;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Map;
+
+import com.esotericsoftware.yamlbeans.YamlException;
+import com.esotericsoftware.yamlbeans.YamlReader;
+
 /**
  * 전체 시스템에서 사용하는 각종 상수값들을 정의한 클래스이다.
  * @author byun-ai
@@ -20,14 +27,10 @@ public class KieasConfiguration
 	
 	public static class KieasAddress 
 	{
-		public static final String ACTIVEMQ_SERVER_IP_LOCAL = "tcp://localhost:61616";
-//		public static final String ACTIVEMQ_SERVER_IP_LOCAL = "tcp://127.0.0.1:61616";
-		
-		public final static String GATEWAY_ID = "maingateway@korea.kr";
-//		public final static String ALERTER_TO_GATEWAY_QUEUE_DESTINATION 		= PACKAGE_NAME+"alerterToGatewayQueue";
-//		public final static String ALERTSYSTEM_TO_GATEWAY_QUEUE_DESTINATION 	= PACKAGE_NAME+"alertSystemToGatewayQueue";
-		
-//		public final static String GATEWAY_TOPIC_DESTINATION 					= PACKAGE_NAME+"gatewayTopic";
+		public static final String DEFAULT_ACTIVEMQ_SERVER_IP_LOCAL = "tcp://localhost:61616";
+		public final static String DEFAULT_GATEWAY_ID = "maingateway@korea.kr";
+		public static String ACTIVEMQ_SERVER_IP_LOCAL = DEFAULT_ACTIVEMQ_SERVER_IP_LOCAL;
+		public static String GATEWAY_ID = DEFAULT_GATEWAY_ID;
 	}
 	
 	public static class KieasConstant
@@ -156,6 +159,23 @@ public class KieasConfiguration
 			"ko-KR",
 			"us-EN"
 		};
-	}	
+	}
+	
+	public static void readConfigFile(String path) {
+		Map<String, String> map = null;
+        try {
+	        YamlReader reader = new YamlReader(new FileReader(path));
+	        map = (Map<String, String>) reader.read();
+        } catch (YamlException e) {
+            System.err.println(e.getMessage());
+            System.exit(2);
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+            System.exit(2);
+		}
+
+        KieasAddress.ACTIVEMQ_SERVER_IP_LOCAL = (String)map.getOrDefault("activemq.server.ip.local", KieasAddress.DEFAULT_ACTIVEMQ_SERVER_IP_LOCAL);
+        KieasAddress.GATEWAY_ID               = (String)map.getOrDefault("gateway.id",               KieasAddress.DEFAULT_GATEWAY_ID);
+	}
 }
 

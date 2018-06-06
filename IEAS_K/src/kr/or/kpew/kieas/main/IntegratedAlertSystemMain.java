@@ -3,6 +3,7 @@ package kr.or.kpew.kieas.main;
 import kr.or.kpew.kieas.alertsystem.AlertSystemManager;
 import kr.or.kpew.kieas.common.AlertSystemProfile;
 import kr.or.kpew.kieas.common.IssuerProfile;
+import kr.or.kpew.kieas.common.KieasConfiguration;
 import kr.or.kpew.kieas.common.Profile;
 import kr.or.kpew.kieas.common.Profile.AlertSystemType;
 import kr.or.kpew.kieas.gateway.controller.GatewayManager;
@@ -44,7 +45,7 @@ public class IntegratedAlertSystemMain {
 		JMS, TCPIP, XMPP, AMQP
 	}
 	
-	public IntegratedAlertSystemMain(Configuration conf)
+	public IntegratedAlertSystemMain()
 	{
 		//JMS 통신방식으로 구성요소들 초기화 작업, 발령대, 게이트웨이, 경보시스템 생성
 		init(TransmitterType.JMS);
@@ -132,7 +133,9 @@ public class IntegratedAlertSystemMain {
 
 	public static void main(String[] args)
 	{
-		Configuration conf = new Configuration(args);
-		new IntegratedAlertSystemMain(conf);
+		ArgumentParser parser = new ArgumentParser(args);
+		KieasConfiguration.readConfigFile(parser.get("conf"));
+		
+		new IntegratedAlertSystemMain();
 	}
 }

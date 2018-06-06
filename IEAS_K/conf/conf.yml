@@ -1,1 +1,1 @@
-issuer.address: localhost:1234
+activemq.server.ip.local: tcp://localhost:61616
