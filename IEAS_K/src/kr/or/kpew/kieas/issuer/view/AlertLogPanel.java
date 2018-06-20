@@ -40,7 +40,6 @@ public class AlertLogPanel
 	
 	private Vector<Object> mViewComponents;
 	private Map<String, Component> mPanelComponents;
-
 	
 	
 	public AlertLogPanel()
@@ -59,7 +58,7 @@ public class AlertLogPanel
 		this.mPanelComponents = new HashMap<>();
 		
 		this.mainBox = Box.createVerticalBox();
-
+		
 		mainBox.add(initTextAreaPanel());
 		mainBox.add(initButtonPanel());
 		mainBox.add(initTablePanel());

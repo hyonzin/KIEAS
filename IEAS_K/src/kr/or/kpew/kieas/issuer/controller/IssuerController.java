@@ -19,8 +19,8 @@ import kr.or.kpew.kieas.issuer.view.IssuerView;
  */
 public class IssuerController implements ActionListener, ListSelectionListener, WindowListener
 { 		
-	private IssuerView view;
-	private IssuerModel model;
+	private static IssuerView view;
+	private static IssuerModel model;
 	
 	public void setModel(IssuerModel model)
 	{
@@ -139,4 +139,10 @@ public class IssuerController implements ActionListener, ListSelectionListener, 
 
 	@Override
 	public void windowOpened(WindowEvent e) {}
+	
+	/* 예약 기능을 위한 send 함수 */
+	public static void sendReservation() {
+		model.setAlertMessage(view.getCapElement());
+		model.sendMessage();
+	}
 }

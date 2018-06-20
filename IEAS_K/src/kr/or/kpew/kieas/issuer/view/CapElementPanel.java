@@ -1,6 +1,7 @@
 package kr.or.kpew.kieas.issuer.view;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -12,13 +13,17 @@ import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
@@ -59,7 +64,10 @@ public class CapElementPanel
 	private JTabbedPane infoPanel;
 	private JComponent areaBox;
 
-	private IssuerController controller;
+	private static IssuerController controller;
+
+	private static JCheckBox reservationCheckBox;
+	private static JSpinner spinner;
 	
 	
 	public CapElementPanel()
@@ -85,6 +93,20 @@ public class CapElementPanel
 		capElementPanel.setBorder(BorderFactory.createTitledBorder(ALERT));
 		
 		this.alertComponentMap = new HashMap<>();
+		
+		reservationCheckBox = new JCheckBox("예약하기");
+		SpinnerModel spinnerModel =
+		        new SpinnerNumberModel(   0,  // initial value
+		                               -100,  // min
+		                                100,  // max
+		                                  1); // step
+		spinner = new JSpinner(spinnerModel);
+		
+		JPanel panelSpinner = new JPanel();
+		panelSpinner.add(new JLabel("온도"));
+		panelSpinner.add(spinner);
+		capElementPanel.add(panelSpinner);
+		capElementPanel.add(reservationCheckBox);
 		
 		capElementPanel.add(addBox(AlertElementNames.Identifier.toString(), IssuerView.TEXT_FIELD, alertComponentMap));
 		capElementPanel.add(addBox(AlertElementNames.Sender.toString(), IssuerView.TEXT_FIELD, alertComponentMap));
@@ -531,5 +553,12 @@ public class CapElementPanel
 		kieasMessageBuilder.parse(message);		
 		String identifier = kieasMessageBuilder.getIdentifier();
 		((JTextField) alertComponentMap.get(AlertElementNames.Identifier.toString())).setText(identifier);
+	}
+	
+	public static void checkReservation(int val) {
+		if (reservationCheckBox.isSelected() && val >= (int)spinner.getValue()) {
+			reservationCheckBox.setSelected(false);
+			controller.sendReservation();
+		}
 	}
 }

@@ -28,12 +28,6 @@ import java.util.ArrayList;
  *
  */
 
-//TODO
-// Builder 를 Interface로 (IBuilder) 만들어서, Google Protobuf를 쓰는 GBuilder, 변조교님이 만든걸 쓰는 BBuilder가 그걸 구현하도록
-// Config 파일 .yml
-// view 항목별로 에쁘게
-// Issuer에서 필수/선택 구분해서 예쁘
-
 public class IntegratedAlertSystemMain {
 
 	/**

@@ -41,8 +41,11 @@ public class AlertGeneratorPanel
 	private CapElementPanel capElementPanel;
 	private Box capElementBox;
 	private Box alertBox;
+	private Box sensorBox;
 
 	private AlertLogPanel alertLogPanel;
+	private SensorPanel sensorPanel;
+	
 
 	public AlertGeneratorPanel()
 	{
@@ -94,12 +97,15 @@ public class AlertGeneratorPanel
 		this.capTabPanel = new JTabbedPane();
 		this.capElementBox = Box.createVerticalBox();
 		this.alertBox = Box.createVerticalBox();
+		this.sensorBox = Box.createVerticalBox();
 		
 		capElementBox.add(initCapElementPanel());
 		alertBox.add(initAlertBox());
+		sensorBox.add(initSensorBox());
 		
 		capTabPanel.addTab("CAP 요소", capElementBox);
 		capTabPanel.addTab("경보 로그", alertBox);
+		capTabPanel.addTab("센서", sensorBox);
 		
 		return capTabPanel;
 	}
@@ -114,6 +120,12 @@ public class AlertGeneratorPanel
 	{
 		this.alertLogPanel = new AlertLogPanel();
 		return alertLogPanel.getPanel();
+	}
+
+	private JComponent initSensorBox()
+	{
+		this.sensorPanel = new SensorPanel();
+		return sensorPanel.getPanel();
 	}
 	
 	private JButton createButton(String name)
