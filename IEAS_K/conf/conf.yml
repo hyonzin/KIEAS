@@ -1,1 +1,2 @@
 activemq.server.ip.local: tcp://localhost:61616
+gateway.id: maingateway@uos.ac.kr

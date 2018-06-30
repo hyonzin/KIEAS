@@ -176,6 +176,8 @@ public class KieasConfiguration
 
         KieasAddress.ACTIVEMQ_SERVER_IP_LOCAL = (String)map.getOrDefault("activemq.server.ip.local", KieasAddress.DEFAULT_ACTIVEMQ_SERVER_IP_LOCAL);
         KieasAddress.GATEWAY_ID               = (String)map.getOrDefault("gateway.id",               KieasAddress.DEFAULT_GATEWAY_ID);
+        System.out.println("activemq.server.ip.local: " + KieasAddress.ACTIVEMQ_SERVER_IP_LOCAL);
+        System.out.println("gateway.id: " + KieasAddress.GATEWAY_ID);
 	}
 }
 

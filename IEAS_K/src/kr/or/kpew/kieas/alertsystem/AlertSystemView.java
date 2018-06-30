@@ -141,8 +141,15 @@ public class AlertSystemView implements Observer {
 		if(arg instanceof IKieasMessageBuilder) {
 			IKieasMessageBuilder kieasMessageBuilder = (IKieasMessageBuilder)arg;
 			
-			// alertArea.setText((String)kieasMessageBuilder.getIdentifier());
-			alertArea.setText(kieasMessageBuilder.getCode());
+			alertArea.setText("Identifier: "   + kieasMessageBuilder.getIdentifier() + "\n"
+							+ "Sender: "       + kieasMessageBuilder.getSender()     + "\n"
+							+ "Date: "         + kieasMessageBuilder.getDate()       + "\n"
+							+ "Status: "       + kieasMessageBuilder.getStatus()     + "\n"
+							+ "Message Type: " + kieasMessageBuilder.getMsgType()    + "\n"
+							+ "Scope: "        + kieasMessageBuilder.getScope()      + "\n"
+							+ "Code: "         + kieasMessageBuilder.getCode()       + "\n"
+							+ "Note: "         + kieasMessageBuilder.getNote()       + "\n"
+							);
 		}
 		else if(arg instanceof AlertSystemProfile) {
 			AlertSystemProfile profile = (AlertSystemProfile)arg;
